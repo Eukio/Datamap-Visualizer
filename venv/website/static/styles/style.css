@@ -1,0 +1,63 @@
+.navbar-brand {
+    background-color: #4c4e50;
+    color: #ffffff !important;
+    font-size: 1.5rem;
+    margin-left: 2em;
+}
+.navbar {
+    background-color: #4c4e50;
+    height: 6rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+.daikin_logo {
+    margin-left: auto;
+    margin-right: 2em;
+    display: flex;
+    align-items: center;
+}
+.form-control{
+    width: 25rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    border-color: #4c4e50;
+    box-shadow: 0 0 0 2px rgba(76, 78, 80, 0.2);
+    outline: none;
+}
+
+#export_csv {
+    position: relative;
+    bottom: 2.4rem;
+    margin: 0;
+    padding: 0.5rem 1.5rem;
+    background-color: #4c4e50;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+#export_csv:hover, #export_csv:focus {
+    background-color: #333;
+}
+.contain{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+}
+h1{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 3rem;
+    color: #333;
+}

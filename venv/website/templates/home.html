@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>Search and View Datamaps Here</h1>
+<div class = "contain">
+<form method='POST' action='/' enctype="multipart/form-data">
+  <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
+  <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
+</form>
+<form method="POST" action="/">
+  <button id="export_csv" class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
+</form>
+</div>
+
+{% endblock %}
