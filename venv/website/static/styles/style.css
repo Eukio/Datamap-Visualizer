@@ -55,9 +55,30 @@
         display: flex;
         flex-direction: column;
 }
-h1{
+h1 {
     text-align: center;
     margin-top: 2rem;
     font-size: 3rem;
     color: #333;
+}
+
+.column_header {
+    font-size: 1.5rem;
+    height: 1.5rem;
+}
+
+.grid_container,
+.container {
+    max-width: 90vw;
+}
+
+.grid_container {
+    display: flex;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    display: block;
 }

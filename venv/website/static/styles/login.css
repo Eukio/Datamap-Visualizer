@@ -1,0 +1,33 @@
+.daikin_background {
+    background-image: url("../images/Login.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 90vw;
+    height: 90vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h3{
+    font-size: 4rem;
+    position: relative;
+    right: 35%;
+    top:-16%
+}
+.login-card {
+    width: 60vmin;
+    height: 60vmin;
+    align-self: center;
+    padding: 5%;
+    border-radius: 2%;
+    background-color: #EFEFEF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    box-sizing: border-box;
+}
+

@@ -2,5 +2,24 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>This is the Login page</h1>
+<div class="daikin_background">
+<div class="login-card">
+      <h3>Sign in</h3>
+      <form method="POST">
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input name="username" class="form-control form-control-lg" />
+              <label class="form-label">Username</label>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input  name="password" type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+              <label class="form-label" for="typePasswordX-2">Password</label>
+            </div>
+
+           
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </form>
+        </div>
+</div>
+    
 {% endblock %}

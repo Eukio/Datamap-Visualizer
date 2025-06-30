@@ -5,13 +5,20 @@
 
 <h1>Search and View Datamaps Here</h1>
 <div class = "contain">
-<form method='POST' action='/' enctype="multipart/form-data">
+<form method='POST' action='#' enctype="multipart/form-data">
   <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
   <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
 </form>
-<form method="POST" action="/">
+<form method="POST" action="#">
   <button id="export_csv" class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
 </form>
 </div>
-
+<div class = "grid_container">
+  {% for column in columnList %}
+    <div class="table"> 
+      <h2 class="column_header">{{ column.columnName }}</h2>
+      {{ column.htmlTable | safe }}
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}
