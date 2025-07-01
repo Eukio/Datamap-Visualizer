@@ -6,8 +6,15 @@
 <h1>Search and View Datamaps Here</h1>
 <div class = "contain">
 <form method='POST' action='#' enctype="multipart/form-data">
+  
   <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
   <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
+<select class="form-select" aria-label="Default select example" name="selection">
+  {% for name in datamapList%}
+  <option value="{{ name }}">{{ name }}</option>
+  {% endfor %}
+
+</select>
 </form>
 <form method="POST" action="#">
   <button id="export_csv" class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
@@ -21,4 +28,5 @@
     </div>
   {% endfor %}
 </div>
+
 {% endblock %}

@@ -18,11 +18,3 @@ def login():
         else:
             return redirect('/home')
     return render_template('login.html', boolean=True)
-
-@auth.route('logout')
-def logout():
-    return "<h1>Logout Page</h1>"
-
-@auth.route('/signup')
-def signup():
-    return render_template('signup.html')

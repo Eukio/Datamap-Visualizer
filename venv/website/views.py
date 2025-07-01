@@ -7,27 +7,29 @@ from werkzeug.utils import secure_filename
 
 CSV_FILEPATH = CSV_FILEPATH = os.path.join(os.path.dirname(__file__), 'data', 'Data.csv')
 DATAMAP_DIRNAME = os.path.join(os.path.dirname(__file__), 'datamaps')
-JSON_DATAMAP_FILEPATH = os.path.join(os.path.dirname(__file__),'datamaps', '2STG_ACAH.json')
 columnList = []
 views = Blueprint('views', __name__)
-
 @views.route('/home', methods = ['GET','POST'])
 def home():
-    if request.method == 'POST' and 'export_csv' in request.form:
-      return send_file(CSV_FILEPATH, as_attachment=True, download_name='Data.csv', mimetype='text/csv')
-    if request.method == 'POST' and 'file' in request.files:
-        return uploadFile(request.files.get('file'))
-    return render_template('home.html', boolean = True, columnList=columnList)
+    print(request.form)
+    if request.method == 'POST': 
+        if 'export_csv' in request.form:
+            return send_file(CSV_FILEPATH, as_attachment=True, download_name='Data.csv', mimetype='text/csv')
+        if 'file' in request.files:
+            return uploadFile(request.files.get('file'), datamap = request.form.get('selection'))
+        if 'switch_user' in request.form:
+            return redirect('/login')
+    return render_template('home.html', boolean = True, columnList=columnList, datamapList=os.listdir(DATAMAP_DIRNAME))
 
-def uploadFile(file):
+def uploadFile(file,datamap):
     global json_input_filepath
     if file.filename.endswith('.json'):
         json_input_filepath = os.path.join(os.path.dirname(__file__), 'data', secure_filename(file.filename))
         file.save(json_input_filepath)
-        flash(f'{file.filename} uploaded successfully!', 'success')
-        createData(json_input_filepath)
+        flash('File uploaded successfully', category='success')
+        createData(json_input_filepath,datamap=datamap)
     else:
-        flash('Please upload a valid JSON file.', 'error')
+        flash('Please upload a valid JSON file.', category='error')
     return redirect('/home')
 
 class Column:
@@ -35,10 +37,11 @@ class Column:
         self.columnName = columnName
         self.htmlTable = htmlTable
 
-def createData(json_input_filepath):
+def createData(json_input_filepath, datamap):
     
     columnList.clear()
-    with open(JSON_DATAMAP_FILEPATH) as json_data:
+    json_datamap_filepath = os.path.join(os.path.dirname(__file__),'datamaps', datamap)
+    with open(json_datamap_filepath) as json_data:
         data = json.load(json_data)
     datamap_df = pd.DataFrame.from_dict(data, orient='index').reset_index().rename(columns={'index': 'Key', 0: 'Value'})
     input_json = pd.read_json(json_input_filepath)
@@ -50,8 +53,7 @@ def createData(json_input_filepath):
         temp_df = temp_df.drop(columns=['Value_x'])
         html_table = tabulate(temp_df, showindex=False, tablefmt='html')
         csv_df= pd.concat([csv_df, temp_df], axis=1)
-        csv_df.to_csv(CSV_FILEPATH, header =
-                       False, index = False, encoding="utf-16")  
+        csv_df.to_csv(CSV_FILEPATH, header = False, index = False, encoding="utf-16")  
         columnList.append(Column(col, html_table)) 
 
 
@@ -63,7 +65,6 @@ def createCSVAcrossMultipleDatamaps():
     output_df = pd.read_csv(CSV_FILEPATH, header=None, encoding="utf-16").T
     output_df.columns = ['Key']
     output_df = output_df.map(lambda x: x.strip() if isinstance(x, str) else x)
-    print(output_df)
     key_df = output_df.copy()
 
     for name in os.listdir(DATAMAP_DIRNAME):
@@ -83,4 +84,4 @@ def createCSVAcrossMultipleDatamaps():
     output_df = output_df.T
     output_df.index.values[0] = ''
     print(output_df)
-    output_df.to_csv(CSV_FILEPATH, header = False, index = False, encoding="utf-16")  
+    output_df.to_csv(CSV_FILEPATH, header = False, index = False, encoding="utf-16") 

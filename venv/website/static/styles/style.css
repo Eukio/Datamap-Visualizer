@@ -3,6 +3,8 @@
     color: #ffffff !important;
     font-size: 1.5rem;
     margin-left: 2em;
+    position: relative;
+    bottom:.7rem;
 }
 .navbar {
     background-color: #4c4e50;
@@ -11,9 +13,21 @@
     display: flex;
     align-items: center;
 }
+.btn.btn-secondary,
+#switch_user {
+    position: relative;
+    left:80em;
+    display: flex;
+}
+.btn.btn-secondary,
+#export_csv {
+    position: relative;
+    left: .2rem;
+    display: flex;
+}
 .daikin_logo {
-    margin-left: auto;
-    margin-right: 2em;
+    position: relative;
+    left:70%;
     display: flex;
     align-items: center;
 }
@@ -82,3 +96,10 @@ h1 {
     max-width: 100%;
     display: block;
 }
+.form-select{
+    position: relative;
+    left: 40%;
+    bottom: -.5rem;
+    height: 2.3rem;
+}
+
