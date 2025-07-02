@@ -9,7 +9,7 @@
   
   <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
   <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
-<select class="form-select" aria-label="Default select example" name="selection">
+<select class="form-select" aria-label="Default select example" name="file_selection">
   {% for name in datamapList%}
   <option value="{{ name }}">{{ name }}</option>
   {% endfor %}

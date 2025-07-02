@@ -15,9 +15,8 @@
 }
 .btn.btn-secondary,
 #switch_user {
-    position: relative;
-    left:80em;
-    display: flex;
+    left:60em;
+    display: inline-block;
 }
 .btn.btn-secondary,
 #export_csv {
@@ -25,10 +24,31 @@
     left: .2rem;
     display: flex;
 }
+#nav_flexbox{
+display: flex;
+}
+.btn.btn-outline-light,
+#refresh_button{
+    display: inline-block;
+}
+.btn.btn-outline-light,
+#refresh_timer_button{
+
+    display: inline-block;
+}
+
+#delay_selection{
+    position: relative;
+    left: .1rem;
+    top: .1rem;
+
+    display: inline-block;
+}
+
 .daikin_logo {
     position: relative;
-    left:70%;
-    display: flex;
+    left:62em;
+    display: block;
     align-items: center;
 }
 .form-control{

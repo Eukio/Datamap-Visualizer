@@ -9,7 +9,8 @@
         "EnphaseEnable": "",
         "ctIFCReturnAirTemperature": "",
         "schedThuPart2Enabled": "",
-        "schedSunPart1Time": ""
+        "schedSunPart1Time": "",
+        "deviceNameCustom":""
     },
     "col_2": {
         "sysFault4Date": "",
