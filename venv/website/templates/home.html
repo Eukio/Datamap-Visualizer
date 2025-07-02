@@ -4,6 +4,22 @@
 {% block content %}
 
 <h1>Search and View Datamaps Here</h1>
+<script>
+  setInterval(() => {
+    fetch('/home')
+      .then(res => res.text())
+      .then(html => {
+         tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+         newGrid = tempDiv.querySelector('.grid_container');
+         gridContainer = document.querySelector('.grid_container');
+        if (newGrid && gridContainer) {
+          gridContainer.innerHTML = newGrid.innerHTML;
+        }
+      });
+  }, 20000);
+</script>
+
 <div class = "contain">
 <form method='POST' action='#' enctype="multipart/form-data">
   
