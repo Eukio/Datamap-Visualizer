@@ -6,7 +6,7 @@ import pandas as pd
 from flask import Blueprint, flash, render_template, request, redirect, send_file, session
 from werkzeug.utils import secure_filename
 from tabulate import tabulate
-from threading import Timer #TODO: FIGURE THIS OUT!
+
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
@@ -18,11 +18,10 @@ columnList = []
 timeDelayList =['None','30','60','90','120','240']
 runTimer = False
 
-views = Blueprint('views', __name__)
+home = Blueprint('home', __name__)
 import auth
-
-@views.route('/home', methods = ['GET','POST'])
-def home():
+@home.route('/home', methods = ['GET','POST'])
+def home_view():
     global runTimer
     if request.method == 'POST': 
         if 'export_csv' in request.form:
@@ -51,7 +50,6 @@ def timerRefresh(time_delay):
         if runTimer == False:
             break
     
-
 def refreshDisplay():
   auth.refreshDatamap() 
   if 'json_filepath' in session:
@@ -72,8 +70,6 @@ def clearDirectory(directory):
         file_path = os.path.join(directory, file)
         if os.path.isfile(file_path):
             os.remove(file_path)
-
-
 
 def uploadFile():
     if request.files.get('file').filename.endswith('json'):

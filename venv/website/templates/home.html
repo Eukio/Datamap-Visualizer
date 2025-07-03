@@ -9,10 +9,10 @@
     fetch('/home')
       .then(res => res.text())
       .then(html => {
-         tempDiv = document.createElement('div');
+        tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
-         newGrid = tempDiv.querySelector('.grid_container');
-         gridContainer = document.querySelector('.grid_container');
+        newGrid = tempDiv.querySelector('.grid_container');
+        gridContainer = document.querySelector('.grid_container');
         if (newGrid && gridContainer) {
           gridContainer.innerHTML = newGrid.innerHTML;
         }
@@ -20,29 +20,27 @@
   }, 20000);
 </script>
 
-<div class = "contain">
-<form method='POST' action='#' enctype="multipart/form-data">
-  
-  <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
-  <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
-<select class="form-select" aria-label="Default select example" name="file_selection">
-  {% for name in datamapList%}
-  <option value="{{ name }}">{{ name }}</option>
-  {% endfor %}
-
-</select>
-</form>
-<form method="POST" action="#">
-  <button id="export_csv" class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
-</form>
+<div class="contain">
+  <form method='POST' action='#' enctype="multipart/form-data">
+    <input class="form-control" type="file" name="file" id="formFile" autocomplete="off" required>
+    <button type="submit" class="btn btn-primary mt-2" value="Submit">Upload JSON</button>
+    <select class="form-select" aria-label="Default select example" name="file_selection">
+      {% for name in datamapList%}
+      <option value="{{ name }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <form method="POST" action="#">
+    <button id="export_csv" class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
+  </form>
 </div>
-<div class = "grid_container">
+
+<div class="grid_container">
   {% for column in columnList %}
-    <div class="table"> 
-      <h2 class="column_header">{{ column.columnName }}</h2>
-      {{ column.htmlTable | safe }}
-    </div>
+  <div class="table">
+    <h2 class="column_header">{{ column.columnName }}</h2>
+    {{ column.htmlTable | safe }}
+  </div>
   {% endfor %}
 </div>
-
 {% endblock %}
