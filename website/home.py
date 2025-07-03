@@ -10,12 +10,13 @@ from tabulate import tabulate
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 if getattr(sys, 'frozen', False):
     base_dir = sys._MEIPASS
+    DATAMAP_DIRNAME = os.path.join(base_dir,'website','datamaps')
 else:
     base_dir = os.path.dirname(__file__)
+    DATAMAP_DIRNAME = os.path.join(base_dir,'datamaps')
 
 DATA_INPUT_DIRNAME = os.path.join(base_dir, 'data')
 CSV_FILEPATH = os.path.join(base_dir, 'data', 'Data.csv')
-DATAMAP_DIRNAME = os.path.join(base_dir,'website','datamaps')
 
 columnList = []
 timeDelayList =['None','30','60','90','120','240']
