@@ -55,6 +55,9 @@ h1 {
     width: 100%;
     max-width: 100%;
     display: block;
+    border: solid;
+    border-color: #c2c2c2;
+    border-width: 2px;
 }
 
 .form-select{
