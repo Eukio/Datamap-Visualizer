@@ -14,24 +14,18 @@ def login():
        
         session['username'] = request.form.get('username')
         session['password'] = request.form.get('password')
-        username = session['username']
-        password = session['password']
-        success = runCollect(username, password)
+        
+        success = runCollect()
         if success == False:
             flash('Username or Password is incorrect', category='error')            
         else:
             return redirect('/home')
     return render_template('login.html', boolean=True)
 
-def runCollect(username, password):
-    collect.main(username,password)
+def runCollect():
+    return collect.main(session['username'], session['password'])
 
-def refreshDatamap():
-    username = session['username']
-    password = session['password']
-    runCollect(username,password)
 
-def resetCred():
-    session.pop("username",None)
-    session.pop("password",None)
+
+
 

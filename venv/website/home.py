@@ -7,7 +7,6 @@ from flask import Blueprint, flash, render_template, request, redirect, send_fil
 from werkzeug.utils import secure_filename
 from tabulate import tabulate
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
 DATA_INPUT_DIRNAME = os.path.join(os.path.dirname(__file__), 'data')
@@ -18,8 +17,10 @@ columnList = []
 timeDelayList =['None','30','60','90','120','240']
 runTimer = False
 
-home = Blueprint('home', __name__)
 import auth
+
+home = Blueprint('home', __name__)
+
 @home.route('/home', methods = ['GET','POST'])
 def home_view():
     global runTimer
@@ -51,7 +52,7 @@ def timerRefresh(time_delay):
             break
     
 def refreshDisplay():
-  auth.refreshDatamap() 
+  auth.runCollect() 
   if 'json_filepath' in session:
     createData(session['json_filepath'], datamap=session['datamap'])
   else:
@@ -61,7 +62,8 @@ def resetUser():
     session.pop("file",None)
     session.pop("datamap",None)
     columnList.clear()
-    auth.resetCred()
+    session.pop("username",None)
+    session.pop("password",None)
     clearDirectory(DATAMAP_DIRNAME)
     clearDirectory(DATA_INPUT_DIRNAME)
           

@@ -18,18 +18,15 @@
     left:60em;
     display: inline-block;
 }
-.btn.btn-secondary,
-#export_csv {
-    position: relative;
-    left: .2rem;
-    display: flex;
-}
+
 #nav_flexbox{
 display: flex;
 }
 .btn.btn-outline-light,
 #refresh_button{
     display: inline-block;
+      position: relative;
+    left: .4rem;
 }
 .btn.btn-outline-light,
 #refresh_timer_button{
@@ -39,9 +36,8 @@ display: flex;
 
 #delay_selection{
     position: relative;
-    left: .1rem;
-    top: .1rem;
-
+    left: .4rem;
+    top: 0rem;
     display: inline-block;
 }
 
