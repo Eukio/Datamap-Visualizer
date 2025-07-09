@@ -2,6 +2,10 @@
 ## A web application used to help the Daikin Controls Testing Team visualize key value data of datamaps with Flask using Python.
 The Controls Testing Portal allows users to login, view, and modify thermostat datamaps stored inside the cloud. The search feature that is used to find specified variables within the datamap only allows users to search for one variable at a time. Therefore, my task was to design a user-friendly UI that can help display information of multiple datamap variables at the same time to help the testing team efficiently and simultaneously observe necessary datamap values without needing to repeatedly type into the search bar.
 I created a Datamap Visualizer- A web application used to help the Daikin Controls Testing Team visualize key value data of datamaps with Flask using Python.
+
+https://github.com/user-attachments/assets/b70697a9-f8c7-4ec5-b547-06f1cf2d49cf
+
+
 - Each thermostat has a datamap, which is JSON file that has key value pairs
 - Input takes a nested JSON file in array format, separating grouped variables by columns to improve organization
 - Outputs an excel file and table of the data
