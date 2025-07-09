@@ -94,43 +94,27 @@ class Column:
         self.htmlTable = htmlTable
 
 def createData(json_input_filepath, datamap):
-    
     columnList.clear()
-    json_datamap_filepath = os.path.join(DATAMAP_DIRNAME, datamap)
-    with open(json_datamap_filepath) as json_data:
-        data = json.load(json_data)
-    datamap_df = pd.DataFrame.from_dict(data, orient='index').reset_index().rename(columns={'index': 'Key', 0: 'Value'})
-    input_json = pd.read_json(json_input_filepath)
+
+    datamap_path = os.path.join(DATAMAP_DIRNAME, datamap)
+    with open(datamap_path) as f:
+        datamap_df = pd.DataFrame.from_dict(json.load(f), orient='index').reset_index()
+    datamap_df.columns = ['Key', 'Value']
+
+    with open(json_input_filepath) as f:
+        raw_data = json.load(f)
+    max_len = max(map(len, raw_data.values()))
+    for k in raw_data:
+        raw_data[k] += [None] * (max_len - len(raw_data[k]))
+    input_df = pd.DataFrame(raw_data)
+
     csv_df = pd.DataFrame()
-    for col in input_json.columns:
-        temp_df = pd.DataFrame(input_json[col]).dropna(how='all')
-        temp_df = temp_df.reset_index().rename(columns={'index': 'Key', col: 'Value'})        
-        temp_df = pd.DataFrame(pd.merge(temp_df, datamap_df, on='Key', how='inner'))
-        temp_df = temp_df.drop(columns=['Value_x'])
-        html_table = tabulate(temp_df, showindex=False, tablefmt='html')
-        csv_df= pd.concat([csv_df, temp_df], axis=1)
-        columnList.append(Column(col, html_table)) 
-    csv_df.to_csv(CSV_FILEPATH, header = False, index = False, encoding="utf-16")  
+    for col in input_df.columns:
+        temp_df = pd.DataFrame(input_df[col].dropna()).reset_index(drop=True).rename(columns={col: 'Key'})
+        merged = pd.merge(temp_df, datamap_df, on='Key', how='inner')
+        html_table = tabulate(merged, showindex=False, tablefmt='html')
+        csv_df= pd.concat([csv_df, merged], axis=1)
 
-#across datamaps, with hardcoded inputs in csv
-def createCSVAcrossMultipleDatamaps(): 
-    output_df = pd.read_csv(CSV_FILEPATH, header=None, encoding="utf-16").T
-    output_df.columns = ['Key']
-    output_df = output_df.map(lambda x: x.strip() if isinstance(x, str) else x)
-    key_df = output_df.copy()
+        columnList.append(Column(col, html_table))
 
-    for name in os.listdir(DATAMAP_DIRNAME):
-        if name.endswith('.json'):
-            path = os.path.join(DATAMAP_DIRNAME, name)
-            with open(path) as json_data:
-                data = json.load(json_data)
-            df = pd.DataFrame.from_dict(data, orient='index').reset_index().rename(columns={'index': 'Key', 0: name})
-
-            temp_df = pd.DataFrame(pd.merge(key_df, df, on='Key', how='inner')[name])
-            temp_df = temp_df.rename(columns={name: name})
-            output_df = pd.concat([output_df, temp_df], axis=1)
-            
-    output_df = output_df.T
-    output_df.index.values[0] = ''
-    print(output_df)
-    output_df.to_csv(CSV_FILEPATH, header = False, index = False, encoding="utf-16") 
+    csv_df.to_csv(CSV_FILEPATH, header=False, index=False, encoding="utf-16")
