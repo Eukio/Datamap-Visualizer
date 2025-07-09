@@ -38,7 +38,7 @@
 <div class="grid_container">
   {% for column in columnList %}
   <div class="table">
-    <h2 class="column_header">{{ column.columnName }}</h2>
+    <!-- <h2 class="column_header">{{ column.columnName }}</h2> //Uncomment this for column headers-->
     {{ column.htmlTable | safe }}
     
   </div>

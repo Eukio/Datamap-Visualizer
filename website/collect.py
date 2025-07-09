@@ -103,7 +103,5 @@ def main(username, password):
             device_data = fetch_device_data(device_id, auth_key)
             if device_data:
                 save_device_data(name, firmware_version, device_data, datamap_directory)
-                time.sleep(20)
-
 if __name__ == "__main__":
     main()
