@@ -8,25 +8,25 @@ I created a Datamap Visualizer- A web application used to help the Daikin Contro
 - User can manually refresh the displayed datamap or set a timer for an auto refresh to fetch updated data from the cloud
 
 ## Example JSON input array format:
-{
-  "col_1": [
-    "statDKNnumber",
-    "P1P2ForcedFanOnUnitNumber",
-    "schedWedPart5hsp",
-    "schedWedPart6hsp"
-  ],
-  "col_2": [
-    "sysFault4Date",
-    "Enphase2SolarNow",
-    "schedSunPart2Label",
-    "fault19Level"
-  ],
-  "col_3": [
-    "rfCoprocHostTxPackets",
-    "fault22Date",
-    "ctAHMode"
-  ]
-}
+>{
+>  "col_1": [
+>    "statDKNnumber",
+>    "P1P2ForcedFanOnUnitNumber",
+>    "schedWedPart5hsp",
+>    "schedWedPart6hsp"
+>  ],
+>  "col_2": [
+>    "sysFault4Date",
+>    "Enphase2SolarNow",
+>    "schedSunPart2Label",
+>    "fault19Level"
+>  ],
+>  "col_3": [
+>    "rfCoprocHostTxPackets",
+>    "fault22Date",
+>    "ctAHMode"
+>  ]
+>}
 
 ## Link to Daikin Testing Portal: https://d3ap1eii0jng13.cloudfront.net/#/ 
 
