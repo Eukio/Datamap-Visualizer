@@ -11,12 +11,17 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 if getattr(sys, 'frozen', False):
     base_dir = sys._MEIPASS
     DATAMAP_DIRNAME = os.path.join(base_dir,'website','datamaps')
+    DATA_INPUT_DIRNAME = os.path.join(base_dir, 'website','data')
+    CSV_FILEPATH = os.path.join(base_dir, 'website', 'data', 'Data.csv')
+    
 else:
     base_dir = os.path.dirname(__file__)
     DATAMAP_DIRNAME = os.path.join(base_dir,'datamaps')
+    DATA_INPUT_DIRNAME = os.path.join(base_dir, 'data')
+    CSV_FILEPATH = os.path.join(base_dir, 'data', 'Data.csv')
 
-DATA_INPUT_DIRNAME = os.path.join(base_dir, 'data')
-CSV_FILEPATH = os.path.join(base_dir, 'data', 'Data.csv')
+os.makedirs(DATAMAP_DIRNAME, exist_ok=True)
+os.makedirs(DATA_INPUT_DIRNAME, exist_ok=True)
 
 columnList = []
 timeDelayList =['None','30','60','90','120','240']
@@ -81,7 +86,6 @@ def clearDirectory(directory):
 def uploadFile():
     if request.files.get('file').filename.endswith('json'):
         flash("File uploaded successfully", category='success')
-        os.makedirs(DATA_INPUT_DIRNAME, exist_ok=True)
         session['json_filepath'] = os.path.join(DATA_INPUT_DIRNAME, secure_filename(request.files.get('file').filename))
         request.files.get('file').save(session['json_filepath'])
         createData(session['json_filepath'], session['datamap'])

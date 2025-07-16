@@ -35,13 +35,14 @@ I created a Datamap Visualizer- A web application used to help the Daikin Contro
 > cd .\Scripts\ 
 > .\activate   
 > $env:FLASK_APP="main.py"   
-//In root project folder
-> flask --debug run     
+> flask --debug run //In root project folder     
 
 ## Make exe:
 //exe located within the dist folder in repo
 > pyinstaller --onefile `
->   --name datamap_visualizer `
->   --add-data "website/static;website/static" `
->   --add-data "website/templates;website/templates" `
->   main.py
+>  --name datamap_visualizer `
+>  --add-data "website/static;website/static" `
+>  --add-data "website/templates;website/templates" `
+>  --add-data "website/datamaps;website/datamaps" `
+>  --add-data "website/data;website/data" `
+>  main.py
